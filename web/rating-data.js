@@ -38,12 +38,12 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "As top" }, { "name": "as bottom" }],
+          "fields": [{ "name": "As top" }, { "name": "As bottom" }],
           "items": [
-            { "name": "One-on-one", "ratings": [null] },
-            { "name": "Threesome", "ratings": [null] },
-            { "name": "Group / orgy", "ratings": [null] },
-            { "name": "Gangbang", "ratings": [null] }
+            { "name": "One-on-one", "ratings": [null, null] },
+            { "name": "Threesome", "ratings": [null, null] },
+            { "name": "Group / orgy", "ratings": [null, null] },
+            { "name": "Gangbang", "ratings": [null, null] }
           ]
         },
         {
@@ -184,17 +184,17 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "as top" }, { "name": "as bottom" }],
+          "fields": [{ "name": "As top" }, { "name": "As bottom" }],
           "items": [
-            { "name": "You and 1 male", "ratings": [null] },
-            { "name": "You and 1 female", "ratings": [null] },
-            { "name": "You and MtF trans", "ratings": [null] },
-            { "name": "You and FtM trans", "ratings": [null] },
-            { "name": "You and 1 male, 1 female", "ratings": [null] },
-            { "name": "You and 2 males", "ratings": [null] },
-            { "name": "You and 2 females", "ratings": [null] },
-            { "name": "Orgy", "ratings": [null] },
-            { "name": "Gangbang", "ratings": [null] }
+            { "name": "You and 1 male", "ratings": [null, null] },
+            { "name": "You and 1 female", "ratings": [null, null] },
+            { "name": "You and MtF trans", "ratings": [null, null] },
+            { "name": "You and FtM trans", "ratings": [null, null] },
+            { "name": "You and 1 male, 1 female", "ratings": [null, null] },
+            { "name": "You and 2 males", "ratings": [null, null] },
+            { "name": "You and 2 females", "ratings": [null, null] },
+            { "name": "Orgy", "ratings": [null, null] },
+            { "name": "Gangbang", "ratings": [null, null] }
           ]
         },
         {
@@ -428,22 +428,22 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "as top" }, { "name": "as bottom" }],
+          "fields": [{ "name": "As top" }, { "name": "As bottom" }],
           "items": [
-            { "name": "You and 1 male", "ratings": [null] },
-            { "name": "You and 1 female", "ratings": [null] },
-            { "name": "You and MtF trans", "ratings": [null] },
-            { "name": "You and FtM trans", "ratings": [null] },
-            { "name": "You and 1 male, 1 female", "ratings": [null] },
-            { "name": "You and 2 males", "ratings": [null] },
-            { "name": "You and 2 females", "ratings": [null] },
-            { "name": "Orgy", "ratings": [null] },
-            { "name": "Gangbang", "ratings": [null] }
+            { "name": "You and 1 male", "ratings": [null, null] },
+            { "name": "You and 1 female", "ratings": [null, null] },
+            { "name": "You and MtF trans", "ratings": [null, null] },
+            { "name": "You and FtM trans", "ratings": [null, null] },
+            { "name": "You and 1 male, 1 female", "ratings": [null, null] },
+            { "name": "You and 2 males", "ratings": [null, null] },
+            { "name": "You and 2 females", "ratings": [null, null] },
+            { "name": "Orgy", "ratings": [null, null] },
+            { "name": "Gangbang", "ratings": [null, null] }
           ]
         },
         {
           "name": "General",
-          "fields": [{ "name": "when Top" }, { "name": "when Bottom" }],
+          "fields": [{ "name": "When top" }, { "name": "When bottom" }],
           "items": [
             { "name": "Romance / affection", "ratings": [null, null] },
             { "name": "Cuddling", "ratings": [null, null] },
@@ -549,8 +549,7 @@ export default {
             { "name": "Blackmail / coercion", "ratings": [null, null] },
             { "name": "Kidnapping", "ratings": [null, null] },
             { "name": "Alcohol", "ratings": [null, null] },
-            { "name": "Sleep", "ratings": [null, null] },
-            { "name": "Somnophilia (sleep)", "ratings": [null, null] },
+            { "name": "Sleep / somnophilia", "ratings": [null, null] },
             { "name": "Drugs", "ratings": [null, null] },
             { "name": "Forced intoxication", "ratings": [null, null] }
           ]
@@ -667,7 +666,7 @@ export default {
         },
         {
           "name": "Watersports / Scat / Diaper",
-          "fields": [{ "name": "self" }, { "name": "partner" }],
+          "fields": [{ "name": "Self" }, { "name": "Partner" }],
           "items": [
             { "name": "Watersports", "ratings": [null, null] },
             { "name": "Scat", "ratings": [null, null] },
