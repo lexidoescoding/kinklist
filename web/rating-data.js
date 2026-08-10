@@ -38,7 +38,7 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "General" }],
+          "fields": [{ "name": "As top" }, {"name": "as bottom"}],
           "items": [
             { "name": "One-on-one", "ratings": [null] },
             { "name": "Threesome", "ratings": [null] },
@@ -184,7 +184,7 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "General" }],
+          "fields": [{ "name": "as top" }, {"name": "as bottom"}],
           "items": [
             { "name": "You and 1 male", "ratings": [null] },
             { "name": "You and 1 female", "ratings": [null] },
@@ -279,23 +279,25 @@ export default {
           ]
         },
         {
-          "name": "No consent (CNC)",
+          "name": "Non consent",
           "fields": [{ "name": "Aggressor" }, { "name": "Target" }],
           "items": [
             { "name": "Consensual non-con / CNC", "ratings": [null, null] },
-            { "name": "Blackmail / coercion play", "ratings": [null, null] },
-            { "name": "Kidnapping play", "ratings": [null, null] },
-            { "name": "Alcohol (consensual intoxication play)", "ratings": [null, null] },
-            { "name": "Sleep play (consensual)", "ratings": [null, null] }
+            { "name": "Blackmail / coercion", "ratings": [null, null] },
+            { "name": "Kidnapping", "ratings": [null, null] },
+            { "name": "Alcohol", "ratings": [null, null] },
+            { "name": "Drugs", "ratings": [null, null] },
+            { "name": "Rape", "ratings": [null, null] }
+          ]
           ]
         },
         {
           "name": "Taboo",
           "fields": [{ "name": "General" }],
           "items": [
-            { "name": "Age gap (adults)", "ratings": [null] },
+            { "name": "Age gap", "ratings": [null] },
             { "name": "Interracial", "ratings": [null] },
-            { "name": "Raceplay (consensual)", "ratings": [null] },
+            { "name": "Raceplay", "ratings": [null] },
             { "name": "Cheating / cuckold fantasy", "ratings": [null] },
             { "name": "Exhibitionism", "ratings": [null] },
             { "name": "Voyeurism", "ratings": [null] }
@@ -309,7 +311,7 @@ export default {
             { "name": "Creampie", "ratings": [null, null] },
             { "name": "Watersports", "ratings": [null, null] },
             { "name": "Lactation", "ratings": [null, null] },
-            { "name": "Blood play (safe / surface)", "ratings": [null, null] },
+            { "name": "Blood play", "ratings": [null, null] },
             { "name": "Scat", "ratings": [null, null] }
           ]
         },
@@ -426,22 +428,23 @@ export default {
           ]
         },
         {
-          "name": "Pairings / Roles",
-          "fields": [{ "name": "Self" }, { "name": "Partner" }],
+          "name": "Groupings",
+          "fields": [{ "name": "as top" }, {"name": "as bottom"}],
           "items": [
-            { "name": "As male", "ratings": [null, null] },
-            { "name": "As female", "ratings": [null, null] },
-            { "name": "As femboy", "ratings": [null, null] },
-            { "name": "As MtF trans", "ratings": [null, null] },
-            { "name": "As FtM trans", "ratings": [null, null] },
-            { "name": "Multiple males", "ratings": [null, null] },
-            { "name": "Multiple females", "ratings": [null, null] },
-            { "name": "Mixed group", "ratings": [null, null] }
+            { "name": "You and 1 male", "ratings": [null] },
+            { "name": "You and 1 female", "ratings": [null] },
+            { "name": "You and MtF trans", "ratings": [null] },
+            { "name": "You and FtM trans", "ratings": [null] },
+            { "name": "You and 1 male, 1 female", "ratings": [null] },
+            { "name": "You and 2 males", "ratings": [null] },
+            { "name": "You and 2 females", "ratings": [null] },
+            { "name": "Orgy", "ratings": [null] },
+            { "name": "Gangbang", "ratings": [null] }
           ]
         },
         {
           "name": "General",
-          "fields": [{ "name": "Top" }, { "name": "Bottom" }],
+          "fields": [{ "name": "when Top" }, { "name": "when Bottom" }],
           "items": [
             { "name": "Romance / affection", "ratings": [null, null] },
             { "name": "Cuddling", "ratings": [null, null] },
@@ -529,7 +532,7 @@ export default {
             { "name": "Domestic servitude", "ratings": [null, null] },
             { "name": "Slavery", "ratings": [null, null] },
             { "name": "Pet play", "ratings": [null, null] },
-            { "name": "DD/lg, MD/lb (adult)", "ratings": [null, null] },
+            { "name": "DD/lg, MD/lb", "ratings": [null, null] },
             { "name": "Discipline", "ratings": [null, null] },
             { "name": "Begging", "ratings": [null, null] },
             { "name": "Forced orgasm", "ratings": [null, null] },
@@ -540,23 +543,24 @@ export default {
           ]
         },
         {
-          "name": "No consent (CNC)",
+          "name": "No consent",
           "fields": [{ "name": "Aggressor" }, { "name": "Target" }],
           "items": [
             { "name": "Consensual non-con / CNC", "ratings": [null, null] },
-            { "name": "Blackmail / coercion play", "ratings": [null, null] },
-            { "name": "Kidnapping play", "ratings": [null, null] },
-            { "name": "Alcohol (consensual)", "ratings": [null, null] },
-            { "name": "Sleep play (consensual)", "ratings": [null, null] }
+            { "name": "Blackmail / coercion", "ratings": [null, null] },
+            { "name": "Kidnapping", "ratings": [null, null] },
+            { "name": "Alcohol", "ratings": [null, null] },
+            { "name": "Sleep", "ratings": [null, null] },
+            { "name": "Drugs", "ratings": [null, null] }
           ]
         },
         {
           "name": "Taboo",
           "fields": [{ "name": "General" }],
           "items": [
-            { "name": "Age gap (adults)", "ratings": [null] },
+            { "name": "Age gap", "ratings": [null] },
             { "name": "Interracial", "ratings": [null] },
-            { "name": "Raceplay (consensual)", "ratings": [null] },
+            { "name": "Raceplay", "ratings": [null] },
             { "name": "Cheating fantasy", "ratings": [null] },
             { "name": "Exhibitionism", "ratings": [null] },
             { "name": "Voyeurism", "ratings": [null] }
@@ -659,14 +663,14 @@ export default {
         },
         {
           "name": "Watersports / Scat / Diaper",
-          "fields": [{ "name": "General" }],
+          "fields": [{ "name": "self" }, {"name": "partner"}],
           "items": [
             { "name": "Watersports", "ratings": [null] },
             { "name": "Scat", "ratings": [null] },
             { "name": "Bathroom control", "ratings": [null] },
             { "name": "Wetting (clothed)", "ratings": [null] },
-            { "name": "Adult baby / age regression", "ratings": [null] },
-            { "name": "Diaper wetting", "ratings": [null] },
+            { "name": "Diaper wearing", "ratings": [null] },,
+            { "name": "Diaper wetting", "ratings": [null] }
             { "name": "Diaper messing", "ratings": [null] },
             { "name": "Marking (urine)", "ratings": [null] }
           ]
