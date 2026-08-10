@@ -18,13 +18,17 @@ Then open the printed URL.
 
 ## Editing content
 
-All groups, items, and fields live in `rating-data.js` — edit it directly and redeploy. There's no in-UI editor by design.
+All lists, groups, items, and fields live in `rating-data.js` — edit it directly and redeploy. There's no in-UI editor by design.
 
 - `scale`: ordered best → worst. The color ramp (`PALETTE` in `app.js`) has 7 fixed colors matching the seed data's 7-point scale; if you change the number of scale entries, update `PALETTE` to match.
-- `groups[].fields`: at most two per group (extras are ignored).
-- `groups[].items[].ratings`: either a plain scale index (e.g. `3`), or `{ theory, practice }` if you want a field to start pre-split.
+- `lists`: the boards the selector under the legend switches between — seeded as `normal`, `detailed`, and `please don't`. Each needs an `id` (used in the JSON), a `label` (shown on the selector button), and its own `groups`. Add or rename as many as you like.
+- `defaultList`: the `id` of the list shown on a fresh page load.
+- `lists[].groups[].fields`: at most two per group (extras are ignored).
+- `lists[].groups[].items[].ratings`: either a plain scale index (e.g. `3`), `null` for unanswered, or `{ theory, practice }` if you want a field to start pre-split.
 
-Changes visitors make in the browser (clicking circles, splitting fields) live only in that page load — reloading resets to whatever's in `rating-data.js`. "Export JSON" and "Share link" are how a set of answers gets captured.
+Changes visitors make in the browser (clicking circles, splitting fields, switching lists) live only in that page load — reloading resets to whatever's in `rating-data.js`. "Export JSON" and "Share link" are how a set of answers gets captured.
+
+Answers are kept per list, so switching back and forth doesn't lose anything, and every list is written out on export/share. The exported JSON records which list was selected as a top-level `activeList` (the list's `id`), and opening a share link starts on that list — viewers can still switch to the others, read-only.
 
 ## Supabase (share links)
 

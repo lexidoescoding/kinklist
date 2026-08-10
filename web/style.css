@@ -177,6 +177,29 @@ button {
   font-size: clamp(9px, 1.8vw, 11px);
 }
 
+.list-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.list-btn {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: clamp(10px, 2.1vw, 12px);
+}
+
+.list-btn:hover { color: var(--text); }
+
+.list-btn.active {
+  border-color: var(--ring);
+  background: var(--text);
+  color: var(--bg);
+}
+
 /* board */
 
 .board {
