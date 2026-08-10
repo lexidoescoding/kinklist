@@ -27,10 +27,10 @@ export default {
             { name: "Visiting" }
           ],
           items: [
-            { name: "Board game night", ratings: [0, { theory: 0, practice: 1 }] },
-            { name: "Costume party", ratings: [2, { theory: 1, practice: 3 }] },
-            { name: "Work mixer", ratings: [5, { theory: 4, practice: 5 }] },
-            { name: "Surprise party", ratings: [4, { theory: 2, practice: 4 }] }
+            { name: "Board game night", ratings: [null, null] },
+            { name: "Costume party", ratings: [null, null] },
+            { name: "Work mixer", ratings: [null, null] },
+            { name: "Surprise party", ratings: [null, null] }
           ]
         },
         {
@@ -40,9 +40,9 @@ export default {
             { name: "Watching" }
           ],
           items: [
-            { name: "Chess", ratings: [1, 3] },
-            { name: "Poker", ratings: [2, 4] },
-            { name: "Esports", ratings: [6, 3] }
+            { name: "Chess", ratings: [null, null] },
+            { name: "Poker", ratings: [null, null] },
+            { name: "Esports", ratings: [null, null] }
           ]
         }
       ]
