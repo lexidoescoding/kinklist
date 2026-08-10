@@ -18,6 +18,8 @@ Then open the printed URL.
 
 ## Editing content
 
+New to this? `web/tutorial.json` is a step-by-step walkthrough of the data shape, written as JSON — six steps, a field-by-field reference, the mistakes that bite, and a complete worked example you can paste straight into `rating-data.js`.
+
 All lists, groups, items, and fields live in `rating-data.js` — edit it directly and redeploy. There's no in-UI editor by design.
 
 - `scale`: ordered best → worst. The color ramp (`PALETTE` in `app.js`) has 7 fixed colors matching the seed data's 7-point scale; if you change the number of scale entries, update `PALETTE` to match.

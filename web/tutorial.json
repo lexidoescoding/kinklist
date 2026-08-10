@@ -1,0 +1,162 @@
+{
+  "title": "How to make a rating list",
+  "about": "A walkthrough of the data shape this board reads. Everything below is plain JSON. When you're happy with a board, paste it into web/rating-data.js after 'export default' and redeploy — that file is the same shape as this one's 'fullExample', just written as JavaScript so the browser can import it without a fetch.",
+  "theShapeInOneLine": "a scale (how you answer) + lists (which board) + groups (a table) + fields (its columns) + items (its rows) + ratings (the answers)",
+
+  "steps": [
+    {
+      "step": 1,
+      "title": "Write your scale",
+      "what": "The answer options, ordered best to worst. Every rating anywhere in the file is an index into this array: 0 is the first entry, 1 the second, and so on. Seven entries is the sweet spot because the colour ramp (PALETTE in app.js) has seven colours — if you use a different number, edit PALETTE to match or you'll get undefined colours.",
+      "example": {
+        "scale": [
+          { "label": "Favorite" },
+          { "label": "Like" },
+          { "label": "Could be fun" },
+          { "label": "Indifferent" },
+          { "label": "Could be convinced" },
+          { "label": "Rather not" },
+          { "label": "No" }
+        ]
+      }
+    },
+    {
+      "step": 2,
+      "title": "Decide your lists",
+      "what": "Each list is a separate board with its own groups. They show up as the buttons under the legend. 'id' is the stable name used in exported JSON, 'label' is what the button says. You can have as many as you like — one is fine.",
+      "example": {
+        "defaultList": "normal",
+        "lists": [
+          { "id": "normal", "label": "normal", "groups": [] },
+          { "id": "detailed", "label": "detailed", "groups": [] },
+          { "id": "please-dont", "label": "please don't", "groups": [] }
+        ]
+      },
+      "tip": "Keep ids lowercase and hyphenated. Changing an id later breaks old share links' saved 'activeList', which will quietly fall back to the first list."
+    },
+    {
+      "step": 3,
+      "title": "Add groups — one table each",
+      "what": "A group is one bordered table on the page. 'name' is its header. Give it 1 or 2 fields; those are the columns. A third field is ignored, so if you need more, split it into two groups.",
+      "example": {
+        "name": "Parties",
+        "fields": [{ "name": "Hosting" }, { "name": "Visiting" }],
+        "items": []
+      }
+    },
+    {
+      "step": 4,
+      "title": "Add items — one row each",
+      "what": "Each item is a row. 'ratings' has one entry per field, in the same order as 'fields'. Use null for anything you haven't answered — that's what you want for a blank board someone else will fill in.",
+      "example": {
+        "name": "Board game night",
+        "ratings": [null, null]
+      }
+    },
+    {
+      "step": 5,
+      "title": "Pre-fill answers (optional)",
+      "what": "A rating can be a plain scale index, or an object with separate 'theory' and 'practice' answers if you want that row to start already split. Anyone using the board can split or merge any cell themselves with the small 'split' link.",
+      "example": {
+        "name": "Costume party",
+        "ratings": [2, { "theory": 1, "practice": 3 }]
+      },
+      "meaning": "Hosting a costume party = 'Could be fun' (index 2). Visiting one = 'Like' in theory (1) but 'Indifferent' in practice (3)."
+    },
+    {
+      "step": 6,
+      "title": "Use it",
+      "what": "Open the page, click circles to answer, click a selected circle again to clear it. Answers are kept separately per list, so switching lists loses nothing. Nothing is saved to the server as you go — 'Export JSON' downloads the whole thing, 'Share link' uploads a snapshot and gives you a read-only URL.",
+      "note": "Reloading the page throws away unsaved clicks and returns to whatever rating-data.js says. That's deliberate; export or share before you close the tab."
+    }
+  ],
+
+  "fieldReference": {
+    "scale": "Required. Array of { label }, best to worst. Its length should match PALETTE in app.js.",
+    "defaultList": "Optional. The id of the list shown on a fresh page load. Unknown or missing id falls back to the first list.",
+    "lists": "Required. Array of boards.",
+    "lists[].id": "Required. Stable identifier, e.g. 'please-dont'. Written into exports as 'activeList'.",
+    "lists[].label": "Required. Text on the selector button, e.g. \"please don't\".",
+    "lists[].groups": "Required (may be empty). Array of tables.",
+    "lists[].groups[].name": "Required. Table header.",
+    "lists[].groups[].fields": "Required. 1 or 2 entries of { name }. Extras beyond two are ignored.",
+    "lists[].groups[].items": "Required. Array of rows.",
+    "lists[].groups[].items[].name": "Required. Row label.",
+    "lists[].groups[].items[].ratings": "Required. One entry per field, in field order. Each entry is null, a scale index (0-based integer), or { theory, practice } where either may be null.",
+    "activeList": "Only in exported/shared JSON, never something you author by hand. Records which list was selected so a share link reopens on it."
+  },
+
+  "gotchas": [
+    "Ratings are indexes, not labels — 0 means the first scale entry, so 0 is your best rating, not your worst.",
+    "'ratings' must line up with 'fields' positionally. Two fields means two entries; use null for the one you're leaving blank.",
+    "More than two fields in a group silently disappear. Make a second group instead.",
+    "More than seven scale entries needs a longer PALETTE in app.js, or the extra circles render with no colour.",
+    "JSON has no comments and no trailing commas. rating-data.js is JavaScript, so there you can use both."
+  ],
+
+  "fullExample": {
+    "scale": [
+      { "label": "Favorite" },
+      { "label": "Like" },
+      { "label": "Could be fun" },
+      { "label": "Indifferent" },
+      { "label": "Could be convinced" },
+      { "label": "Rather not" },
+      { "label": "No" }
+    ],
+    "defaultList": "normal",
+    "lists": [
+      {
+        "id": "normal",
+        "label": "normal",
+        "groups": [
+          {
+            "name": "Weekends",
+            "fields": [{ "name": "Doing" }, { "name": "Being invited" }],
+            "items": [
+              { "name": "Long walk", "ratings": [0, 1] },
+              { "name": "Museum", "ratings": [2, { "theory": 1, "practice": 3 }] },
+              { "name": "Brunch", "ratings": [3, null] }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "detailed",
+        "label": "detailed",
+        "groups": [
+          {
+            "name": "Weekends — walking",
+            "fields": [{ "name": "Alone" }, { "name": "With people" }],
+            "items": [
+              { "name": "An hour", "ratings": [null, null] },
+              { "name": "Half a day", "ratings": [null, null] },
+              { "name": "All day, with a hill", "ratings": [null, null] }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "please-dont",
+        "label": "please don't",
+        "groups": [
+          {
+            "name": "Weekends",
+            "fields": [{ "name": "Doing" }, { "name": "Being invited" }],
+            "items": [
+              { "name": "Anything before 9am", "ratings": [null, null] },
+              { "name": "Plans made same-day", "ratings": [null, null] }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "installing": [
+    "Open web/rating-data.js.",
+    "Replace everything after 'export default' with your object (the shape of 'fullExample' above), ending in a semicolon.",
+    "Quotes around keys are optional in JavaScript — keep them or drop them, both work.",
+    "Reload the page. A blank board with an error in the browser console usually means a typo in the object; a blank board with no error usually means an empty 'groups'."
+  ]
+}
