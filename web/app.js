@@ -5,6 +5,7 @@ const PALETTE = ["#6DB5FE", "#23FD22", "#B6FD3B", "#FDFD6B", "#FCB53B", "#DB6C00
 
 const state = {
   data: null,
+  activeList: 0,
   values: {},
   expanded: {},
   theme: "light",
@@ -18,28 +19,49 @@ const els = {
   shareBtn: document.getElementById("share-link"),
   bannerSlot: document.getElementById("banner-slot"),
   legendScale: document.getElementById("legend-scale"),
+  listSelect: document.getElementById("list-select"),
   board: document.getElementById("board"),
   footerNote: document.getElementById("footer-note"),
 };
 
-function key(gi, ii, fi, slot) {
-  return slot ? `${gi}.${ii}.${fi}.${slot}` : `${gi}.${ii}.${fi}`;
+function key(li, gi, ii, fi, slot) {
+  return slot ? `${li}.${gi}.${ii}.${fi}.${slot}` : `${li}.${gi}.${ii}.${fi}`;
+}
+
+// Accepts both the multi-list shape and the older single-board shape
+// (`{ scale, groups }`), so snapshots shared before lists existed still open.
+function normalizeData(data) {
+  const lists = Array.isArray(data.lists)
+    ? data.lists.map((l, i) => ({
+        id: l.id || `list-${i}`,
+        label: l.label || l.id || `List ${i + 1}`,
+        groups: l.groups || [],
+      }))
+    : [{ id: "normal", label: "normal", groups: data.groups || [] }];
+  return { scale: data.scale, lists };
+}
+
+function activeListIndex(data, wanted) {
+  const i = data.lists.findIndex((l) => l.id === wanted);
+  return i === -1 ? 0 : i;
 }
 
 function seedFromData(data) {
   const values = {};
   const expanded = {};
-  data.groups.forEach((g, gi) => {
-    g.fields.slice(0, 2).forEach((f, fi) => {
-      g.items.forEach((item, ii) => {
-        const v = item.ratings ? item.ratings[fi] : null;
-        if (v && typeof v === "object") {
-          if (v.practice != null) values[key(gi, ii, fi, "practice")] = v.practice;
-          if (v.theory != null) values[key(gi, ii, fi, "theory")] = v.theory;
-          if (v.theory != null && v.theory !== v.practice) expanded[key(gi, ii, fi)] = true;
-        } else if (v != null) {
-          values[key(gi, ii, fi, "practice")] = v;
-        }
+  data.lists.forEach((list, li) => {
+    list.groups.forEach((g, gi) => {
+      g.fields.slice(0, 2).forEach((f, fi) => {
+        g.items.forEach((item, ii) => {
+          const v = item.ratings ? item.ratings[fi] : null;
+          if (v && typeof v === "object") {
+            if (v.practice != null) values[key(li, gi, ii, fi, "practice")] = v.practice;
+            if (v.theory != null) values[key(li, gi, ii, fi, "theory")] = v.theory;
+            if (v.theory != null && v.theory !== v.practice) expanded[key(li, gi, ii, fi)] = true;
+          } else if (v != null) {
+            values[key(li, gi, ii, fi, "practice")] = v;
+          }
+        });
       });
     });
   });
@@ -94,6 +116,26 @@ function renderLegend() {
   });
 }
 
+function selectList(li) {
+  if (state.activeList === li) return;
+  state.activeList = li;
+  renderListSelect();
+  renderBoard();
+}
+
+function renderListSelect() {
+  els.listSelect.replaceChildren();
+  state.data.lists.forEach((list, li) => {
+    const btn = el("button", "list-btn", list.label);
+    btn.type = "button";
+    const active = li === state.activeList;
+    if (active) btn.classList.add("active");
+    btn.setAttribute("aria-pressed", active ? "true" : "false");
+    btn.addEventListener("click", () => selectList(li));
+    els.listSelect.append(btn);
+  });
+}
+
 function renderCircleRow(k) {
   const row = el("div", "circle-row");
   const sel = state.values[k];
@@ -123,7 +165,7 @@ function renderCellLine(k, caption) {
   return line;
 }
 
-function renderGroup(group, gi) {
+function renderGroup(group, gi, li) {
   const fields = group.fields.slice(0, 2);
   const n = fields.length;
 
@@ -140,15 +182,15 @@ function renderGroup(group, gi) {
   group.items.forEach((item, ii) => {
     grid.append(el("div", "row-name", item.name));
     fields.forEach((f, fi) => {
-      const ek = key(gi, ii, fi);
+      const ek = key(li, gi, ii, fi);
       const open = !!state.expanded[ek];
       const cell = el("div", "cell");
 
       if (open) {
-        cell.append(renderCellLine(key(gi, ii, fi, "theory"), "T"));
-        cell.append(renderCellLine(key(gi, ii, fi, "practice"), "P"));
+        cell.append(renderCellLine(key(li, gi, ii, fi, "theory"), "T"));
+        cell.append(renderCellLine(key(li, gi, ii, fi, "practice"), "P"));
       } else {
-        cell.append(renderCellLine(key(gi, ii, fi, "practice"), ""));
+        cell.append(renderCellLine(key(li, gi, ii, fi, "practice"), ""));
       }
 
       const toggleBtn = el("button", "toggle-btn", open ? "merge" : "split");
@@ -166,11 +208,18 @@ function renderBoard() {
   els.board.replaceChildren();
   if (!state.data) return;
 
-  const need = Math.max(...state.data.groups.map((g) => 110 + Math.min(g.fields.length, 2) * 175));
+  const li = state.activeList;
+  const groups = state.data.lists[li].groups;
+  if (!groups.length) {
+    els.board.append(el("div", "error-box", "This list has no groups yet."));
+    return;
+  }
+
+  const need = Math.max(...groups.map((g) => 110 + Math.min(g.fields.length, 2) * 175));
   els.board.style.gridTemplateColumns = `repeat(auto-fit, minmax(min(100%, ${need}px), 1fr))`;
 
-  state.data.groups.forEach((g, gi) => {
-    els.board.append(renderGroup(g, gi));
+  groups.forEach((g, gi) => {
+    els.board.append(renderGroup(g, gi, li));
   });
 }
 
@@ -178,24 +227,30 @@ function currentJSON() {
   const { data, values, expanded } = state;
   return {
     scale: data.scale,
-    groups: data.groups.map((g, gi) => {
-      const fields = g.fields.slice(0, 2);
-      return {
-        name: g.name,
-        fields,
-        items: g.items.map((item, ii) => ({
-          name: item.name,
-          ratings: fields.map((f, fi) => {
-            const p = values[key(gi, ii, fi, "practice")];
-            const t = values[key(gi, ii, fi, "theory")];
-            if (expanded[key(gi, ii, fi)]) {
-              return { theory: t != null ? t : null, practice: p != null ? p : null };
-            }
-            return p != null ? p : null;
-          }),
-        })),
-      };
-    }),
+    // Which list was being filled out — the selector reopens on this one.
+    activeList: data.lists[state.activeList].id,
+    lists: data.lists.map((list, li) => ({
+      id: list.id,
+      label: list.label,
+      groups: list.groups.map((g, gi) => {
+        const fields = g.fields.slice(0, 2);
+        return {
+          name: g.name,
+          fields,
+          items: g.items.map((item, ii) => ({
+            name: item.name,
+            ratings: fields.map((f, fi) => {
+              const p = values[key(li, gi, ii, fi, "practice")];
+              const t = values[key(li, gi, ii, fi, "theory")];
+              if (expanded[key(li, gi, ii, fi)]) {
+                return { theory: t != null ? t : null, practice: p != null ? p : null };
+              }
+              return p != null ? p : null;
+            }),
+          })),
+        };
+      }),
+    })),
   };
 }
 
@@ -277,8 +332,10 @@ async function init() {
 
   if (shareId) {
     try {
-      const data = await fetchSnapshot(shareId);
+      const raw = await fetchSnapshot(shareId);
+      const data = normalizeData(raw);
       state.data = data;
+      state.activeList = activeListIndex(data, raw.activeList);
       state.readOnly = true;
       Object.assign(state, seedFromData(data));
     } catch (err) {
@@ -287,18 +344,21 @@ async function init() {
       return;
     }
   } else {
-    state.data = defaultData;
-    Object.assign(state, seedFromData(defaultData));
+    const data = normalizeData(defaultData);
+    state.data = data;
+    state.activeList = activeListIndex(data, defaultData.defaultList);
+    Object.assign(state, seedFromData(data));
   }
 
   if (state.readOnly) {
-    els.hint.textContent = "Read-only view of a shared snapshot.";
+    els.hint.textContent = "Read-only view of a shared snapshot — you can still switch lists.";
     els.shareBtn.style.display = "none";
     els.footerNote.style.display = "none";
   }
 
   renderReadOnlyBanner();
   renderLegend();
+  renderListSelect();
   renderBoard();
 }
 
