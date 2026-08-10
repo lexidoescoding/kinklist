@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ratings</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="header">
+    <div>
+      <h1>Ratings</h1>
+      <p id="hint">Click a circle to answer. Click it again to clear.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn" id="theme-toggle">Dark mode</button>
+      <button class="btn" id="export-json">Export JSON</button>
+      <button class="btn btn-primary" id="share-link">Share link</button>
+    </div>
+  </header>
+
+  <div id="banner-slot"></div>
+
+  <div class="legend" id="legend-panel">
+    <div class="legend-section">
+      <div class="legend-title">Scale</div>
+      <div class="legend-row" id="legend-scale"></div>
+    </div>
+    <div class="legend-section">
+      <div class="legend-title">Theory / practice</div>
+      <div class="tp-row">
+        <div class="tp-item"><span class="tp-tag">T</span><span>In theory — how you feel about the idea</span></div>
+        <div class="tp-item"><span class="tp-tag">P</span><span>In practice — how it actually goes</span></div>
+        <div class="tp-item"><span class="split-hint-label">split</span><span class="muted">on any answer to rate the two separately</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <p class="footer-note" id="footer-note">Groups and items live in <code>rating-data.js</code> — two fields per group.</p>
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
