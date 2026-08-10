@@ -38,7 +38,7 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "As top" }, {"name": "as bottom"}],
+          "fields": [{ "name": "As top" }, { "name": "as bottom" }],
           "items": [
             { "name": "One-on-one", "ratings": [null] },
             { "name": "Threesome", "ratings": [null] },
@@ -184,7 +184,7 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "as top" }, {"name": "as bottom"}],
+          "fields": [{ "name": "as top" }, { "name": "as bottom" }],
           "items": [
             { "name": "You and 1 male", "ratings": [null] },
             { "name": "You and 1 female", "ratings": [null] },
@@ -288,7 +288,6 @@ export default {
             { "name": "Alcohol", "ratings": [null, null] },
             { "name": "Drugs", "ratings": [null, null] },
             { "name": "Rape", "ratings": [null, null] }
-          ]
           ]
         },
         {
@@ -429,7 +428,7 @@ export default {
         },
         {
           "name": "Groupings",
-          "fields": [{ "name": "as top" }, {"name": "as bottom"}],
+          "fields": [{ "name": "as top" }, { "name": "as bottom" }],
           "items": [
             { "name": "You and 1 male", "ratings": [null] },
             { "name": "You and 1 female", "ratings": [null] },
@@ -551,7 +550,9 @@ export default {
             { "name": "Kidnapping", "ratings": [null, null] },
             { "name": "Alcohol", "ratings": [null, null] },
             { "name": "Sleep", "ratings": [null, null] },
-            { "name": "Drugs", "ratings": [null, null] }
+            { "name": "Somnophilia (sleep)", "ratings": [null, null] },
+            { "name": "Drugs", "ratings": [null, null] },
+            { "name": "Forced intoxication", "ratings": [null, null] }
           ]
         },
         {
@@ -563,7 +564,9 @@ export default {
             { "name": "Raceplay", "ratings": [null] },
             { "name": "Cheating fantasy", "ratings": [null] },
             { "name": "Exhibitionism", "ratings": [null] },
-            { "name": "Voyeurism", "ratings": [null] }
+            { "name": "Voyeurism", "ratings": [null] },
+            { "name": "Incest fantasy (adult)", "ratings": [null] },
+            { "name": "Bestiality", "ratings": [null] }
           ]
         },
         {
@@ -577,7 +580,8 @@ export default {
             { "name": "Blood play", "ratings": [null] },
             { "name": "Sweat / musk", "ratings": [null] },
             { "name": "Saliva / spit", "ratings": [null] },
-            { "name": "Messy play", "ratings": [null] }
+            { "name": "Messy play", "ratings": [null] },
+            { "name": "Vomit / emetophilia", "ratings": [null] }
           ]
         },
         {
@@ -621,8 +625,8 @@ export default {
             { "name": "Food play", "ratings": [null, null] },
             { "name": "Muscle worship", "ratings": [null, null] },
             { "name": "Adult baby / age regression", "ratings": [null, null] },
-            { "name": "Diaper wetting", "ratings": [null, null] },
-            { "name": "Diaper messing", "ratings": [null, null] }
+            { "name": "CNC with strangers / public", "ratings": [null, null] },
+            { "name": "Medical play / needles", "ratings": [null, null] }
           ]
         },
         {
@@ -663,16 +667,16 @@ export default {
         },
         {
           "name": "Watersports / Scat / Diaper",
-          "fields": [{ "name": "self" }, {"name": "partner"}],
+          "fields": [{ "name": "self" }, { "name": "partner" }],
           "items": [
-            { "name": "Watersports", "ratings": [null] },
-            { "name": "Scat", "ratings": [null] },
-            { "name": "Bathroom control", "ratings": [null] },
-            { "name": "Wetting (clothed)", "ratings": [null] },
-            { "name": "Diaper wearing", "ratings": [null] },,
-            { "name": "Diaper wetting", "ratings": [null] }
-            { "name": "Diaper messing", "ratings": [null] },
-            { "name": "Marking (urine)", "ratings": [null] }
+            { "name": "Watersports", "ratings": [null, null] },
+            { "name": "Scat", "ratings": [null, null] },
+            { "name": "Bathroom control", "ratings": [null, null] },
+            { "name": "Wetting (clothed)", "ratings": [null, null] },
+            { "name": "Diaper wearing", "ratings": [null, null] },
+            { "name": "Diaper wetting", "ratings": [null, null] },
+            { "name": "Diaper messing", "ratings": [null, null] },
+            { "name": "Marking (urine)", "ratings": [null, null] }
           ]
         },
         {
@@ -698,8 +702,18 @@ export default {
             { "name": "Hair pulling", "ratings": [null, null] },
             { "name": "Face slapping", "ratings": [null, null] }
           ]
+        },
+        {
+          "name": "Extreme / Medical",
+          "fields": [{ "name": "General" }],
+          "items": [
+            { "name": "Needles / medical play", "ratings": [null] },
+            { "name": "Surface cutting / bloodletting", "ratings": [null] },
+            { "name": "Electric play (high intensity)", "ratings": [null] },
+            { "name": "Asphyxiation (heavy)", "ratings": [null] }
+          ]
         }
       ]
     }
   ]
-}
+};
